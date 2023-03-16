@@ -1,0 +1,860 @@
+WITH customer_data AS (
+  SELECT 
+    customer_id,
+    COUNT(DISTINCT order_id) AS total_orders,
+    SUM(order_total) AS total_spent,
+    MAX(order_date) AS latest_order_date,
+    AVG(days_between_orders) AS avg_days_between_orders,
+    MAX(MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 30 DAY) THEN order_id END),0))) AS orders_last_30_days,
+    MAX(MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 60 DAY) THEN order_id END),0))) AS orders_last_60_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 90 DAY) THEN order_id END),0)) AS orders_last_90_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 120 DAY) THEN order_id END),0)) AS orders_last_120_days,
+    MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 150 DAY) THEN order_id END),0)) AS orders_last_150_days,
+    MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 180 DAY) THEN order_id END),0)) AS orders_last_180_days,
+    MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 210 DAY) THEN order_id END),0)) AS orders_last_210_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 240 DAY) THEN order_id END),0)) AS orders_last_240_days,
+    MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 270 DAY) THEN order_id END),0)) AS orders_last_270_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 300 DAY) THEN order_id END),0)) AS orders_last_300_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 330 DAY) THEN order_id END),0)) AS orders_last_330_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 360 DAY) THEN order_id END),0)) AS orders_last_360_days
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 390 DAY) THEN order_id END),0)) AS orders_last_390_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 410 DAY) THEN order_id END),0)) AS orders_last_410_days,
+	MAX(COALESCE(COUNT(DISTINCT CASE WHEN order_date >= DATE_SUB(NOW(), INTERVAL 440 DAY) THEN order_id END),0)) AS orders_last_440_days,
+	MAX(COALESCE(cust_days_data_14_days.value2307, 0)) AS value2307 
+    MAX(COALESCE(customer_outcome.value811, 0)) AS value811 
+	,MAX(COALESCE(customer_outcome.value871, 0)) AS value871 
+	,MAX(COALESCE(customer_outcome.value895, 0)) AS value895 
+	,MAX(COALESCE(customer_outcome.value1015, 0)) AS value1015 
+	,MAX(COALESCE(customer_outcome.value812, 0)) AS value812 
+	,MAX(COALESCE(customer_outcome.value872, 0)) AS value872 
+	,MAX(COALESCE(customer_outcome.value896, 0)) AS value896 
+	,MAX(COALESCE(customer_outcome.value920, 0)) AS value920 
+	,MAX(COALESCE(customer_outcome.value1016, 0)) AS value1016 
+	,MAX(COALESCE(customer_outcome.value756, 0)) AS value756 
+	,MAX(COALESCE(customer_outcome.value840, 0)) AS value840 
+	,MAX(COALESCE(customer_outcome.value912, 0)) AS value912 
+	,MAX(COALESCE(customer_outcome.value1013, 0)) AS value1013 
+	,MAX(COALESCE(customer_outcome.value774, 0)) AS value774 
+	,MAX(COALESCE(customer_outcome.value930, 0)) AS value930 
+	,MAX(COALESCE(customer_outcome.value954, 0)) AS value954 
+	,MAX(COALESCE(customer_outcome.value966, 0)) AS value966 
+	,MAX(COALESCE(customer_outcome.value1014, 0)) AS value1014 
+	,MAX(COALESCE(customer_outcome.value1026, 0)) AS value1026 
+	,MAX(COALESCE(customer_outcome.value1038, 0)) AS value1038 
+	,MAX(COALESCE(customer_outcome.value771, 0)) AS value771 
+	,MAX(COALESCE(customer_outcome.value855, 0)) AS value855 
+	,MAX(COALESCE(customer_outcome.value951, 0)) AS value951 
+	,MAX(COALESCE(customer_outcome.value963, 0)) AS value963 
+	,MAX(COALESCE(customer_outcome.value1011, 0)) AS value1011 
+	,MAX(COALESCE(customer_outcome.value755, 0)) AS value755 
+	,MAX(COALESCE(customer_outcome.value827, 0)) AS value827 
+	,MAX(COALESCE(customer_outcome.value839, 0)) AS value839 
+	,MAX(COALESCE(customer_outcome.value911, 0)) AS value911 
+	,MAX(COALESCE(customer_outcome.value753, 0)) AS value753 
+	,MAX(COALESCE(customer_outcome.value765, 0)) AS value765 
+	,MAX(COALESCE(customer_outcome.value806, 0)) AS value806 
+	,MAX(COALESCE(customer_outcome.value825, 0)) AS value825 
+	,MAX(COALESCE(customer_outcome.value837, 0)) AS value837 
+	,MAX(COALESCE(customer_outcome.value878, 0)) AS value878 
+	,MAX(COALESCE(customer_outcome.value909, 0)) AS value909 
+	,MAX(COALESCE(icust_data_1.value3367, 0)) AS value3367 
+	,MAX(COALESCE(icust_data_1.value3415, 0)) AS value3415 
+	,MAX(COALESCE(icust_data_1.value3439, 0)) AS value3439 
+	,MAX(COALESCE(icust_data_1.value3523, 0)) AS value3523 
+	,MAX(COALESCE(icust_data_1.value3535, 0)) AS value3535 
+	,MAX(COALESCE(icust_data_1.value3547, 0)) AS value3547 
+	,MAX(COALESCE(icust_data_1.value3559, 0)) AS value3559 
+	,MAX(COALESCE(icust_data_1.value3595, 0)) AS value3595 
+	,MAX(COALESCE(icust_data_1.value3619, 0)) AS value3619 
+	,MAX(COALESCE(icust_data_1.value3368, 0)) AS value3368 
+	,MAX(COALESCE(icust_data_1.value3416, 0)) AS value3416 
+	,MAX(COALESCE(icust_data_1.value3428, 0)) AS value3428 
+	,MAX(COALESCE(icust_data_1.value3440, 0)) AS value3440 
+	,MAX(COALESCE(icust_data_1.value3512, 0)) AS value3512 
+	,MAX(COALESCE(icust_data_1.value3524, 0)) AS value3524 
+	,MAX(COALESCE(icust_data_1.value3536, 0)) AS value3536 
+	,MAX(COALESCE(icust_data_1.value3548, 0)) AS value3548 
+	,MAX(COALESCE(icust_data_1.value3596, 0)) AS value3596 
+	,MAX(COALESCE(icust_data_1.value3620, 0)) AS value3620 
+	,MAX(COALESCE(icust_data_1.value3377, 0)) AS value3377 
+	,MAX(COALESCE(icust_data_1.value3425, 0)) AS value3425 
+	,MAX(COALESCE(icust_data_1.value3521, 0)) AS value3521 
+	,MAX(COALESCE(icust_data_1.value3545, 0)) AS value3545 
+	,MAX(COALESCE(icust_data_1.value3557, 0)) AS value3557 
+	,MAX(COALESCE(icust_data_1.value3629, 0)) AS value3629 
+	,MAX(COALESCE(icust_data_1.value3399, 0)) AS value3399 
+	,MAX(COALESCE(icust_data_1.value3423, 0)) AS value3423 
+	,MAX(COALESCE(icust_data_1.value3435, 0)) AS value3435 
+	,MAX(COALESCE(icust_data_1.value3447, 0)) AS value3447 
+	,MAX(COALESCE(icust_data_1.value3507, 0)) AS value3507 
+	,MAX(COALESCE(icust_data_1.value3519, 0)) AS value3519 
+	,MAX(COALESCE(icust_data_1.value3543, 0)) AS value3543 
+	,MAX(COALESCE(icust_data_1.value3555, 0)) AS value3555 
+	,MAX(COALESCE(icust_data_1.value3603, 0)) AS value3603 
+	,MAX(COALESCE(icust_data_1.value3627, 0)) AS value3627 
+	,MAX(COALESCE(icust_data_1.value3424, 0)) AS value3424 
+	,MAX(COALESCE(icust_data_1.value3448, 0)) AS value3448 
+	,MAX(COALESCE(icust_data_1.value3544, 0)) AS value3544 
+	,MAX(COALESCE(icust_data_1.value3556, 0)) AS value3556 
+	,MAX(COALESCE(icust_data_1.value3604, 0)) AS value3604 
+	,MAX(COALESCE(icust_data_1.value3628, 0)) AS value3628 
+	,MAX(COALESCE(icust_data_1.value3374, 0)) AS value3374 
+	,MAX(COALESCE(icust_data_1.value3422, 0)) AS value3422 
+	,MAX(COALESCE(icust_data_1.value3446, 0)) AS value3446 
+	,MAX(COALESCE(icust_data_1.value3542, 0)) AS value3542 
+	,MAX(COALESCE(icust_data_1.value3554, 0)) AS value3554 
+	,MAX(COALESCE(icust_data_1.value3602, 0)) AS value3602 
+	,MAX(COALESCE(icust_data_1.value3626, 0)) AS value3626 
+	,MAX(COALESCE(cust_days_data_28_days.value2061, 0)) AS value2061 
+	,MAX(COALESCE(cust_days_data_30_days.value1637, 0)) AS value1637 
+	,MAX(COALESCE(cust_days_data_365_days.value499, 0)) AS value499 
+	,MAX(COALESCE(cust_days_data_365_days.value511, 0)) AS value511 
+	,MAX(COALESCE(cust_days_data_365_days.value523, 0)) AS value523 
+	,MAX(COALESCE(cust_days_data_365_days.value535, 0)) AS value535 
+	,MAX(COALESCE(cust_days_data_365_days.value547, 0)) AS value547 
+	,MAX(COALESCE(cust_days_data_365_days.value559, 0)) AS value559 
+	,MAX(COALESCE(cust_days_data_365_days.value583, 0)) AS value583 
+	,MAX(COALESCE(cust_days_data_365_days.value595, 0)) AS value595 
+	,MAX(COALESCE(cust_days_data_365_days.value607, 0)) AS value607 
+	,MAX(COALESCE(cust_days_data_365_days.value679, 0)) AS value679 
+	,MAX(COALESCE(cust_days_data_365_days.value727, 0)) AS value727 
+	,MAX(COALESCE(cust_days_data_365_days.value488, 0)) AS value488 
+	,MAX(COALESCE(cust_days_data_365_days.value500, 0)) AS value500 
+	,MAX(COALESCE(cust_days_data_365_days.value512, 0)) AS value512 
+	,MAX(COALESCE(cust_days_data_365_days.value524, 0)) AS value524 
+	,MAX(COALESCE(cust_days_data_365_days.value536, 0)) AS value536 
+	,MAX(COALESCE(cust_days_data_365_days.value548, 0)) AS value548 
+	,MAX(COALESCE(cust_days_data_365_days.value584, 0)) AS value584 
+	,MAX(COALESCE(cust_days_data_365_days.value596, 0)) AS value596 
+	,MAX(COALESCE(cust_days_data_365_days.value608, 0)) AS value608 
+	,MAX(COALESCE(cust_days_data_365_days.value632, 0)) AS value632 
+	,MAX(COALESCE(cust_days_data_365_days.value656, 0)) AS value656 
+	,MAX(COALESCE(cust_days_data_365_days.value680, 0)) AS value680 
+	,MAX(COALESCE(cust_days_data_365_days.value728, 0)) AS value728 
+	,MAX(COALESCE(cust_days_data_365_days.value468, 0)) AS value468 
+	,MAX(COALESCE(cust_days_data_365_days.value480, 0)) AS value480 
+	,MAX(COALESCE(cust_days_data_365_days.value485, 0)) AS value485 
+	,MAX(COALESCE(cust_days_data_365_days.value504, 0)) AS value504 
+	,MAX(COALESCE(cust_days_data_365_days.value552, 0)) AS value552 
+	,MAX(COALESCE(cust_days_data_365_days.value557, 0)) AS value557 
+	,MAX(COALESCE(cust_days_data_365_days.value564, 0)) AS value564 
+	,MAX(COALESCE(cust_days_data_365_days.value593, 0)) AS value593 
+	,MAX(COALESCE(cust_days_data_365_days.value624, 0)) AS value624 
+	,MAX(COALESCE(cust_days_data_365_days.value749, 0)) AS value749 
+	,MAX(COALESCE(cust_days_data_365_days.value481, 0)) AS value481 
+	,MAX(COALESCE(cust_days_data_365_days.value486, 0)) AS value486 
+	,MAX(COALESCE(cust_days_data_365_days.value505, 0)) AS value505 
+	,MAX(COALESCE(cust_days_data_365_days.value522, 0)) AS value522 
+	,MAX(COALESCE(cust_days_data_365_days.value529, 0)) AS value529 
+	,MAX(COALESCE(cust_days_data_365_days.value534, 0)) AS value534 
+	,MAX(COALESCE(cust_days_data_365_days.value625, 0)) AS value625 
+	,MAX(COALESCE(cust_days_data_365_days.value642, 0)) AS value642 
+	,MAX(COALESCE(cust_days_data_365_days.value666, 0)) AS value666 
+	,MAX(COALESCE(cust_days_data_365_days.value678, 0)) AS value678 
+	,MAX(COALESCE(cust_days_data_365_days.value726, 0)) AS value726 
+	,MAX(COALESCE(cust_days_data_365_days.value738, 0)) AS value738 
+	,MAX(COALESCE(cust_days_data_365_days.value750, 0)) AS value750 
+	,MAX(COALESCE(cust_days_data_365_days.value471, 0)) AS value471 
+	,MAX(COALESCE(cust_days_data_365_days.value483, 0)) AS value483 
+	,MAX(COALESCE(cust_days_data_365_days.value519, 0)) AS value519 
+	,MAX(COALESCE(cust_days_data_365_days.value555, 0)) AS value555 
+	,MAX(COALESCE(cust_days_data_365_days.value567, 0)) AS value567 
+	,MAX(COALESCE(cust_days_data_365_days.value579, 0)) AS value579 
+	,MAX(COALESCE(cust_days_data_365_days.value627, 0)) AS value627 
+	,MAX(COALESCE(cust_days_data_365_days.value663, 0)) AS value663 
+	,MAX(COALESCE(cust_days_data_365_days.value675, 0)) AS value675 
+	,MAX(COALESCE(cust_days_data_365_days.value723, 0)) AS value723 
+	,MAX(COALESCE(cust_days_data_365_days.value467, 0)) AS value467 
+	,MAX(COALESCE(cust_days_data_365_days.value472, 0)) AS value472 
+	,MAX(COALESCE(cust_days_data_365_days.value479, 0)) AS value479 
+	,MAX(COALESCE(cust_days_data_365_days.value484, 0)) AS value484 
+	,MAX(COALESCE(cust_days_data_365_days.value503, 0)) AS value503 
+	,MAX(COALESCE(cust_days_data_365_days.value539, 0)) AS value539 
+	,MAX(COALESCE(cust_days_data_365_days.value551, 0)) AS value551 
+	,MAX(COALESCE(cust_days_data_365_days.value563, 0)) AS value563 
+	,MAX(COALESCE(cust_days_data_365_days.value580, 0)) AS value580 
+	,MAX(COALESCE(cust_days_data_365_days.value592, 0)) AS value592 
+	,MAX(COALESCE(cust_days_data_365_days.value623, 0)) AS value623 
+	,MAX(COALESCE(cust_days_data_365_days.value465, 0)) AS value465 
+	,MAX(COALESCE(cust_days_data_365_days.value470, 0)) AS value470 
+	,MAX(COALESCE(cust_days_data_365_days.value477, 0)) AS value477 
+	,MAX(COALESCE(cust_days_data_365_days.value482, 0)) AS value482 
+	,MAX(COALESCE(cust_days_data_365_days.value501, 0)) AS value501 
+	,MAX(COALESCE(cust_days_data_365_days.value518, 0)) AS value518 
+	,MAX(COALESCE(cust_days_data_365_days.value537, 0)) AS value537 
+	,MAX(COALESCE(cust_days_data_365_days.value542, 0)) AS value542 
+	,MAX(COALESCE(cust_days_data_365_days.value549, 0)) AS value549 
+	,MAX(COALESCE(cust_days_data_365_days.value554, 0)) AS value554 
+	,MAX(COALESCE(cust_days_data_365_days.value561, 0)) AS value561 
+	,MAX(COALESCE(cust_days_data_365_days.value590, 0)) AS value590 
+	,MAX(COALESCE(cust_days_data_365_days.value621, 0)) AS value621 
+	,MAX(COALESCE(cust_days_data_365_days.value633, 0)) AS value633 
+	,MAX(COALESCE(cust_days_data_3_days.value3079, 0)) AS value3079 
+	,MAX(COALESCE(cust_days_data_3_days.value3139, 0)) AS value3139 
+	,MAX(COALESCE(cust_days_data_3_days.value3163, 0)) AS value3163 
+	,MAX(COALESCE(cust_days_data_3_days.value3211, 0)) AS value3211 
+	,MAX(COALESCE(cust_days_data_3_days.value3259, 0)) AS value3259 
+	,MAX(COALESCE(cust_days_data_3_days.value3271, 0)) AS value3271 
+	,MAX(COALESCE(cust_days_data_3_days.value3283, 0)) AS value3283 
+	,MAX(COALESCE(cust_days_data_3_days.value3080, 0)) AS value3080 
+	,MAX(COALESCE(cust_days_data_3_days.value3140, 0)) AS value3140 
+	,MAX(COALESCE(cust_days_data_3_days.value3152, 0)) AS value3152 
+	,MAX(COALESCE(cust_days_data_3_days.value3164, 0)) AS value3164 
+	,MAX(COALESCE(cust_days_data_3_days.value3212, 0)) AS value3212 
+	,MAX(COALESCE(cust_days_data_3_days.value3236, 0)) AS value3236 
+	,MAX(COALESCE(cust_days_data_3_days.value3260, 0)) AS value3260 
+	,MAX(COALESCE(cust_days_data_3_days.value3272, 0)) AS value3272 
+	,MAX(COALESCE(cust_days_data_3_days.value3284, 0)) AS value3284 
+	,MAX(COALESCE(cust_days_data_3_days.value3161, 0)) AS value3161 
+	,MAX(COALESCE(cust_days_data_3_days.value3221, 0)) AS value3221 
+	,MAX(COALESCE(cust_days_data_3_days.value3269, 0)) AS value3269 
+	,MAX(COALESCE(cust_days_data_3_days.value3281, 0)) AS value3281 
+	,MAX(COALESCE(cust_days_data_3_days.value3111, 0)) AS value3111 
+	,MAX(COALESCE(cust_days_data_3_days.value3147, 0)) AS value3147 
+	,MAX(COALESCE(cust_days_data_3_days.value3159, 0)) AS value3159 
+	,MAX(COALESCE(cust_days_data_3_days.value3171, 0)) AS value3171 
+	,MAX(COALESCE(cust_days_data_3_days.value3219, 0)) AS value3219 
+	,MAX(COALESCE(cust_days_data_3_days.value3267, 0)) AS value3267 
+	,MAX(COALESCE(cust_days_data_3_days.value3315, 0)) AS value3315 
+	,MAX(COALESCE(cust_days_data_3_days.value3112, 0)) AS value3112 
+	,MAX(COALESCE(cust_days_data_3_days.value3220, 0)) AS value3220 
+	,MAX(COALESCE(cust_days_data_3_days.value3268, 0)) AS value3268 
+	,MAX(COALESCE(cust_days_data_3_days.value3146, 0)) AS value3146 
+	,MAX(COALESCE(cust_days_data_3_days.value3218, 0)) AS value3218 
+	,MAX(COALESCE(cust_days_data_3_days.value3266, 0)) AS value3266 
+	,MAX(COALESCE(cust_days_data_3_days.value3278, 0)) AS value3278 
+	,MAX(COALESCE(cust_days_data_3_days.value3290, 0)) AS value3290 
+	,MAX(COALESCE(cust_days_data_5_days.value2851, 0)) AS value2851 
+	,MAX(COALESCE(cust_days_data_5_days.value2875, 0)) AS value2875 
+	,MAX(COALESCE(cust_days_data_5_days.value2923, 0)) AS value2923 
+	,MAX(COALESCE(cust_days_data_5_days.value2947, 0)) AS value2947 
+	,MAX(COALESCE(cust_days_data_5_days.value2971, 0)) AS value2971 
+	,MAX(COALESCE(cust_days_data_5_days.value2983, 0)) AS value2983 
+	,MAX(COALESCE(cust_days_data_5_days.value2995, 0)) AS value2995 
+	,MAX(COALESCE(cust_days_data_5_days.value2924, 0)) AS value2924 
+	,MAX(COALESCE(cust_days_data_5_days.value2972, 0)) AS value2972 
+	,MAX(COALESCE(cust_days_data_5_days.value2984, 0)) AS value2984 
+	,MAX(COALESCE(cust_days_data_5_days.value2996, 0)) AS value2996 
+	,MAX(COALESCE(cust_days_data_5_days.value2933, 0)) AS value2933 
+	,MAX(COALESCE(cust_days_data_5_days.value2981, 0)) AS value2981 
+	,MAX(COALESCE(cust_days_data_5_days.value2993, 0)) AS value2993 
+	,MAX(COALESCE(cust_days_data_5_days.value3005, 0)) AS value3005 
+	,MAX(COALESCE(cust_days_data_5_days.value2859, 0)) AS value2859 
+	,MAX(COALESCE(cust_days_data_5_days.value2883, 0)) AS value2883 
+	,MAX(COALESCE(cust_days_data_5_days.value2931, 0)) AS value2931 
+	,MAX(COALESCE(cust_days_data_5_days.value2979, 0)) AS value2979 
+	,MAX(COALESCE(cust_days_data_5_days.value2991, 0)) AS value2991 
+	,MAX(COALESCE(cust_days_data_5_days.value3003, 0)) AS value3003 
+	,MAX(COALESCE(cust_days_data_5_days.value2884, 0)) AS value2884 
+	,MAX(COALESCE(cust_days_data_5_days.value2932, 0)) AS value2932 
+	,MAX(COALESCE(cust_days_data_5_days.value2980, 0)) AS value2980 
+	,MAX(COALESCE(cust_days_data_5_days.value2992, 0)) AS value2992 
+	,MAX(COALESCE(cust_days_data_5_days.value2882, 0)) AS value2882 
+	,MAX(COALESCE(cust_days_data_5_days.value2930, 0)) AS value2930 
+	,MAX(COALESCE(cust_days_data_5_days.value2978, 0)) AS value2978 
+	,MAX(COALESCE(cust_days_data_5_days.value2990, 0)) AS value2990 
+	,MAX(COALESCE(cust_days_data_5_days.value3002, 0)) AS value3002 
+	,MAX(COALESCE(cust_days_data_60_days.value1332, 0)) AS value1332 
+	,MAX(COALESCE(cust_days_data_60_days.value1344, 0)) AS value1344 
+	,MAX(COALESCE(cust_days_data_60_days.value1349, 0)) AS value1349 
+	,MAX(COALESCE(cust_days_data_60_days.value1500, 0)) AS value1500 
+	,MAX(COALESCE(cust_days_data_60_days.value1383, 0)) AS value1383 
+	,MAX(COALESCE(cust_days_data_60_days.value1503, 0)) AS value1503 
+	,MAX(COALESCE(cust_days_data_60_days.value1527, 0)) AS value1527 
+	,MAX(COALESCE(cust_days_data_60_days.value1587, 0)) AS value1587 
+	,MAX(COALESCE(cust_days_data_60_days.value1611, 0)) AS value1611 
+	,MAX(COALESCE(cust_days_data_60_days.value1331, 0)) AS value1331 
+	,MAX(COALESCE(cust_days_data_60_days.value1343, 0)) AS value1343 
+	,MAX(COALESCE(cust_days_data_60_days.value1499, 0)) AS value1499 
+	,MAX(COALESCE(cust_days_data_60_days.value1329, 0)) AS value1329 
+	,MAX(COALESCE(cust_days_data_60_days.value1341, 0)) AS value1341 
+	,MAX(COALESCE(cust_days_data_60_days.value1365, 0)) AS value1365 
+	,MAX(COALESCE(cust_days_data_60_days.value1497, 0)) AS value1497 
+	,MAX(COALESCE(cust_days_data_7_days.value2695, 0)) AS value2695 
+	,MAX(COALESCE(cust_days_data_7_days.value2564, 0)) AS value2564 
+	,MAX(COALESCE(cust_days_data_7_days.value2588, 0)) AS value2588 
+	,MAX(COALESCE(cust_days_data_7_days.value2696, 0)) AS value2696 
+	,MAX(COALESCE(cust_days_data_7_days.value2708, 0)) AS value2708 
+	,MAX(COALESCE(cust_days_data_7_days.value2705, 0)) AS value2705 
+	,MAX(COALESCE(cust_days_data_7_days.value2559, 0)) AS value2559 
+	,MAX(COALESCE(cust_days_data_7_days.value2691, 0)) AS value2691 
+	,MAX(COALESCE(cust_days_data_7_days.value2596, 0)) AS value2596 
+	,MAX(COALESCE(cust_days_data_7_days.value2594, 0)) AS value2594 
+	,MAX(COALESCE(cust_days_data_90_days.value1039, 0)) AS value1039 
+	,MAX(COALESCE(cust_days_data_90_days.value1051, 0)) AS value1051 
+	,MAX(COALESCE(cust_days_data_90_days.value1099, 0)) AS value1099 
+	,MAX(COALESCE(cust_days_data_90_days.value1159, 0)) AS value1159 
+	,MAX(COALESCE(cust_days_data_90_days.value1171, 0)) AS value1171 
+	,MAX(COALESCE(cust_days_data_90_days.value1183, 0)) AS value1183 
+	,MAX(COALESCE(cust_days_data_90_days.value1303, 0)) AS value1303 
+	,MAX(COALESCE(cust_days_data_90_days.value1052, 0)) AS value1052 
+	,MAX(COALESCE(cust_days_data_90_days.value1100, 0)) AS value1100 
+	,MAX(COALESCE(cust_days_data_90_days.value1148, 0)) AS value1148 
+	,MAX(COALESCE(cust_days_data_90_days.value1160, 0)) AS value1160 
+	,MAX(COALESCE(cust_days_data_90_days.value1184, 0)) AS value1184 
+	,MAX(COALESCE(cust_days_data_90_days.value1196, 0)) AS value1196 
+	,MAX(COALESCE(cust_days_data_90_days.value1208, 0)) AS value1208 
+	,MAX(COALESCE(cust_days_data_90_days.value1304, 0)) AS value1304 
+	,MAX(COALESCE(cust_days_data_90_days.value1061, 0)) AS value1061 
+	,MAX(COALESCE(cust_days_data_90_days.value1116, 0)) AS value1116 
+	,MAX(COALESCE(cust_days_data_90_days.value1140, 0)) AS value1140 
+	,MAX(COALESCE(cust_days_data_90_days.value1200, 0)) AS value1200 
+	,MAX(COALESCE(cust_days_data_90_days.value1212, 0)) AS value1212 
+	,MAX(COALESCE(cust_days_data_90_days.value1217, 0)) AS value1217 
+	,MAX(COALESCE(cust_days_data_90_days.value1301, 0)) AS value1301 
+	,MAX(COALESCE(cust_days_data_90_days.value1059, 0)) AS value1059 
+	,MAX(COALESCE(cust_days_data_90_days.value1095, 0)) AS value1095 
+	,MAX(COALESCE(cust_days_data_90_days.value1131, 0)) AS value1131 
+	,MAX(COALESCE(cust_days_data_90_days.value1215, 0)) AS value1215 
+	,MAX(COALESCE(cust_days_data_90_days.value1239, 0)) AS value1239 
+	,MAX(COALESCE(cust_days_data_90_days.value1251, 0)) AS value1251 
+	,MAX(COALESCE(cust_days_data_90_days.value1299, 0)) AS value1299 
+	,MAX(COALESCE(cust_days_data_90_days.value1323, 0)) AS value1323 
+	,MAX(COALESCE(cust_days_data_90_days.value1060, 0)) AS value1060 
+	,MAX(COALESCE(cust_days_data_90_days.value1079, 0)) AS value1079 
+	,MAX(COALESCE(cust_days_data_90_days.value1115, 0)) AS value1115 
+	,MAX(COALESCE(cust_days_data_90_days.value1139, 0)) AS value1139 
+	,MAX(COALESCE(cust_days_data_90_days.value1144, 0)) AS value1144 
+	,MAX(COALESCE(cust_days_data_90_days.value1199, 0)) AS value1199 
+	,MAX(COALESCE(cust_days_data_90_days.value1211, 0)) AS value1211 
+	,MAX(COALESCE(cust_days_data_90_days.value1077, 0)) AS value1077 
+	,MAX(COALESCE(cust_days_data_90_days.value1113, 0)) AS value1113 
+	,MAX(COALESCE(cust_days_data_90_days.value1137, 0)) AS value1137 
+	,MAX(COALESCE(cust_days_data_90_days.value1142, 0)) AS value1142 
+	,MAX(COALESCE(cust_days_data_90_days.value1149, 0)) AS value1149 
+	,MAX(COALESCE(cust_days_data_90_days.value1197, 0)) AS value1197 
+	,MAX(COALESCE(cust_days_data_90_days.value1209, 0)) AS value1209 
+	,MAX(COALESCE(cust_days_data_90_days.value1245, 0)) AS value1245 
+	,MAX(COALESCE(cust_days_data0101_14_days.value127, 0)) AS value127 
+	,MAX(COALESCE(cust_days_data0101_14_days.value134, 0)) AS value134 
+	,MAX(COALESCE(cust_days_data0101_14_days.value141, 0)) AS value141 
+	,MAX(COALESCE(cust_days_data0101_14_days.value135, 0)) AS value135 
+	,MAX(COALESCE(cust_days_data0101_14_days.value142, 0)) AS value142 
+	,MAX(COALESCE(cust_days_data0101_14_days.value139, 0)) AS value139 
+	,MAX(COALESCE(cust_days_data0101_14_days.value146, 0)) AS value146 
+	,MAX(COALESCE(cust_days_data0101_14_days.value130, 0)) AS value130 
+	,MAX(COALESCE(cust_days_data0101_14_days.value137, 0)) AS value137 
+	,MAX(COALESCE(cust_days_data0101_14_days.value144, 0)) AS value144 
+	,MAX(COALESCE(cust_days_data0101_14_days.value131, 0)) AS value131 
+	,MAX(COALESCE(cust_days_data0101_14_days.value138, 0)) AS value138 
+	,MAX(COALESCE(cust_days_data0101_14_days.value145, 0)) AS value145 
+	,MAX(COALESCE(cust_days_data0101_14_days.value129, 0)) AS value129 
+	,MAX(COALESCE(cust_days_data0101_14_days.value136, 0)) AS value136 
+	,MAX(COALESCE(cust_days_data0101_14_days.value143, 0)) AS value143 
+	,MAX(COALESCE(cust_days_data0101_180_days.value29, 0)) AS value29 
+	,MAX(COALESCE(cust_days_data0101_180_days.value30, 0)) AS value30 
+	,MAX(COALESCE(cust_days_data0101_180_days.value27, 0)) AS value27 
+	,MAX(COALESCE(cust_days_data0101_180_days.value25, 0)) AS value25 
+	,MAX(COALESCE(cust_days_data0101_180_days.value26, 0)) AS value26 
+	,MAX(COALESCE(cust_days_data0101_180_days.value24, 0)) AS value24 
+	,MAX(COALESCE(cust_days_data0101_1_day.value211, 0)) AS value211 
+	,MAX(COALESCE(cust_days_data0101_1_day.value218, 0)) AS value218 
+	,MAX(COALESCE(cust_days_data0101_1_day.value225, 0)) AS value225 
+	,MAX(COALESCE(cust_days_data0101_1_day.value219, 0)) AS value219 
+	,MAX(COALESCE(cust_days_data0101_1_day.value226, 0)) AS value226 
+	,MAX(COALESCE(cust_days_data0101_1_day.value216, 0)) AS value216 
+	,MAX(COALESCE(cust_days_data0101_1_day.value223, 0)) AS value223 
+	,MAX(COALESCE(cust_days_data0101_1_day.value230, 0)) AS value230 
+	,MAX(COALESCE(cust_days_data0101_1_day.value214, 0)) AS value214 
+	,MAX(COALESCE(cust_days_data0101_1_day.value221, 0)) AS value221 
+	,MAX(COALESCE(cust_days_data0101_1_day.value228, 0)) AS value228 
+	,MAX(COALESCE(cust_days_data0101_1_day.value215, 0)) AS value215 
+	,MAX(COALESCE(cust_days_data0101_1_day.value222, 0)) AS value222 
+	,MAX(COALESCE(cust_days_data0101_1_day.value229, 0)) AS value229 
+	,MAX(COALESCE(cust_days_data0101_1_day.value213, 0)) AS value213 
+	,MAX(COALESCE(cust_days_data0101_1_day.value220, 0)) AS value220 
+	,MAX(COALESCE(cust_days_data0101_1_day.value227, 0)) AS value227 
+	,MAX(COALESCE(cust_days_data0101_28_days.value106, 0)) AS value106 
+	,MAX(COALESCE(cust_days_data0101_28_days.value113, 0)) AS value113 
+	,MAX(COALESCE(cust_days_data0101_28_days.value120, 0)) AS value120 
+	,MAX(COALESCE(cust_days_data0101_28_days.value114, 0)) AS value114 
+	,MAX(COALESCE(cust_days_data0101_28_days.value121, 0)) AS value121 
+	,MAX(COALESCE(cust_days_data0101_28_days.value111, 0)) AS value111 
+	,MAX(COALESCE(cust_days_data0101_28_days.value125, 0)) AS value125 
+	,MAX(COALESCE(cust_days_data0101_28_days.value109, 0)) AS value109 
+	,MAX(COALESCE(cust_days_data0101_28_days.value116, 0)) AS value116 
+	,MAX(COALESCE(cust_days_data0101_28_days.value123, 0)) AS value123 
+	,MAX(COALESCE(cust_days_data0101_28_days.value124, 0)) AS value124 
+	,MAX(COALESCE(cust_days_data0101_28_days.value108, 0)) AS value108 
+	,MAX(COALESCE(cust_days_data0101_28_days.value115, 0)) AS value115 
+	,MAX(COALESCE(cust_days_data0101_28_days.value122, 0)) AS value122 
+	,MAX(COALESCE(cust_days_data0101_30_days.value85, 0)) AS value85 
+	,MAX(COALESCE(cust_days_data0101_30_days.value92, 0)) AS value92 
+	,MAX(COALESCE(cust_days_data0101_30_days.value99, 0)) AS value99 
+	,MAX(COALESCE(cust_days_data0101_30_days.value93, 0)) AS value93 
+	,MAX(COALESCE(cust_days_data0101_30_days.value100, 0)) AS value100 
+	,MAX(COALESCE(cust_days_data0101_30_days.value90, 0)) AS value90 
+	,MAX(COALESCE(cust_days_data0101_30_days.value97, 0)) AS value97 
+	,MAX(COALESCE(cust_days_data0101_30_days.value104, 0)) AS value104 
+	,MAX(COALESCE(cust_days_data0101_30_days.value88, 0)) AS value88 
+	,MAX(COALESCE(cust_days_data0101_30_days.value95, 0)) AS value95 
+	,MAX(COALESCE(cust_days_data0101_30_days.value102, 0)) AS value102 
+	,MAX(COALESCE(cust_days_data0101_30_days.value96, 0)) AS value96 
+	,MAX(COALESCE(cust_days_data0101_30_days.value103, 0)) AS value103 
+	,MAX(COALESCE(cust_days_data0101_30_days.value87, 0)) AS value87 
+	,MAX(COALESCE(cust_days_data0101_30_days.value94, 0)) AS value94 
+	,MAX(COALESCE(cust_days_data0101_30_days.value101, 0)) AS value101 
+	,MAX(COALESCE(cust_days_data0101_365_days.value1, 0)) AS value1 
+	,MAX(COALESCE(cust_days_data0101_365_days.value15, 0)) AS value15 
+	,MAX(COALESCE(cust_days_data0101_365_days.value9, 0)) AS value9 
+	,MAX(COALESCE(cust_days_data0101_365_days.value16, 0)) AS value16 
+	,MAX(COALESCE(cust_days_data0101_365_days.value13, 0)) AS value13 
+	,MAX(COALESCE(cust_days_data0101_365_days.value20, 0)) AS value20 
+	,MAX(COALESCE(cust_days_data0101_365_days.value14, 0)) AS value14 
+	,MAX(COALESCE(cust_days_data0101_365_days.value4, 0)) AS value4 
+	,MAX(COALESCE(cust_days_data0101_365_days.value11, 0)) AS value11 
+	,MAX(COALESCE(cust_days_data0101_365_days.value18, 0)) AS value18 
+	,MAX(COALESCE(cust_days_data0101_365_days.value12, 0)) AS value12 
+	,MAX(COALESCE(cust_days_data0101_365_days.value19, 0)) AS value19 
+	,MAX(COALESCE(cust_days_data0101_365_days.value3, 0)) AS value3 
+	,MAX(COALESCE(cust_days_data0101_365_days.value10, 0)) AS value10 
+	,MAX(COALESCE(cust_days_data0101_365_days.value17, 0)) AS value17 
+	,MAX(COALESCE(cust_days_data0101_3_days.value190, 0)) AS value190 
+	,MAX(COALESCE(cust_days_data0101_3_days.value197, 0)) AS value197 
+	,MAX(COALESCE(cust_days_data0101_3_days.value204, 0)) AS value204 
+	,MAX(COALESCE(cust_days_data0101_3_days.value198, 0)) AS value198 
+	,MAX(COALESCE(cust_days_data0101_3_days.value205, 0)) AS value205 
+	,MAX(COALESCE(cust_days_data0101_3_days.value195, 0)) AS value195 
+	,MAX(COALESCE(cust_days_data0101_3_days.value209, 0)) AS value209 
+	,MAX(COALESCE(cust_days_data0101_3_days.value193, 0)) AS value193 
+	,MAX(COALESCE(cust_days_data0101_3_days.value200, 0)) AS value200 
+	,MAX(COALESCE(cust_days_data0101_3_days.value207, 0)) AS value207 
+	,MAX(COALESCE(cust_days_data0101_3_days.value194, 0)) AS value194 
+	,MAX(COALESCE(cust_days_data0101_3_days.value208, 0)) AS value208 
+	,MAX(COALESCE(cust_days_data0101_3_days.value192, 0)) AS value192 
+	,MAX(COALESCE(cust_days_data0101_3_days.value199, 0)) AS value199 
+	,MAX(COALESCE(cust_days_data0101_3_days.value206, 0)) AS value206 
+	,MAX(COALESCE(cust_days_data0101_5_days.value169, 0)) AS value169 
+	,MAX(COALESCE(cust_days_data0101_5_days.value176, 0)) AS value176 
+	,MAX(COALESCE(cust_days_data0101_5_days.value183, 0)) AS value183 
+	,MAX(COALESCE(cust_days_data0101_5_days.value177, 0)) AS value177 
+	,MAX(COALESCE(cust_days_data0101_5_days.value184, 0)) AS value184 
+	,MAX(COALESCE(cust_days_data0101_5_days.value174, 0)) AS value174 
+	,MAX(COALESCE(cust_days_data0101_5_days.value181, 0)) AS value181 
+	,MAX(COALESCE(cust_days_data0101_5_days.value188, 0)) AS value188 
+	,MAX(COALESCE(cust_days_data0101_5_days.value172, 0)) AS value172 
+	,MAX(COALESCE(cust_days_data0101_5_days.value179, 0)) AS value179 
+	,MAX(COALESCE(cust_days_data0101_5_days.value186, 0)) AS value186 
+	,MAX(COALESCE(cust_days_data0101_5_days.value173, 0)) AS value173 
+	,MAX(COALESCE(cust_days_data0101_5_days.value180, 0)) AS value180 
+	,MAX(COALESCE(cust_days_data0101_5_days.value187, 0)) AS value187 
+	,MAX(COALESCE(cust_days_data0101_5_days.value171, 0)) AS value171 
+	,MAX(COALESCE(cust_days_data0101_5_days.value178, 0)) AS value178 
+	,MAX(COALESCE(cust_days_data0101_5_days.value185, 0)) AS value185 
+	,MAX(COALESCE(cust_days_data0101_60_days.value64, 0)) AS value64 
+	,MAX(COALESCE(cust_days_data0101_60_days.value71, 0)) AS value71 
+	,MAX(COALESCE(cust_days_data0101_60_days.value78, 0)) AS value78 
+	,MAX(COALESCE(cust_days_data0101_60_days.value72, 0)) AS value72 
+	,MAX(COALESCE(cust_days_data0101_60_days.value79, 0)) AS value79 
+	,MAX(COALESCE(cust_days_data0101_60_days.value69, 0)) AS value69 
+	,MAX(COALESCE(cust_days_data0101_60_days.value76, 0)) AS value76 
+	,MAX(COALESCE(cust_days_data0101_60_days.value83, 0)) AS value83 
+	,MAX(COALESCE(cust_days_data0101_60_days.value67, 0)) AS value67 
+	,MAX(COALESCE(cust_days_data0101_60_days.value74, 0)) AS value74 
+	,MAX(COALESCE(cust_days_data0101_60_days.value81, 0)) AS value81 
+	,MAX(COALESCE(cust_days_data0101_60_days.value68, 0)) AS value68 
+	,MAX(COALESCE(cust_days_data0101_60_days.value75, 0)) AS value75 
+	,MAX(COALESCE(cust_days_data0101_60_days.value82, 0)) AS value82 
+	,MAX(COALESCE(cust_days_data0101_60_days.value66, 0)) AS value66 
+	,MAX(COALESCE(cust_days_data0101_60_days.value73, 0)) AS value73 
+	,MAX(COALESCE(cust_days_data0101_60_days.value80, 0)) AS value80 
+	,MAX(COALESCE(cust_days_data0101_7_days.value148, 0)) AS value148 
+	,MAX(COALESCE(cust_days_data0101_7_days.value155, 0)) AS value155 
+	,MAX(COALESCE(cust_days_data0101_7_days.value162, 0)) AS value162 
+	,MAX(COALESCE(cust_days_data0101_7_days.value156, 0)) AS value156 
+	,MAX(COALESCE(cust_days_data0101_7_days.value163, 0)) AS value163 
+	,MAX(COALESCE(cust_days_data0101_7_days.value153, 0)) AS value153 
+	,MAX(COALESCE(cust_days_data0101_7_days.value160, 0)) AS value160 
+	,MAX(COALESCE(cust_days_data0101_7_days.value167, 0)) AS value167 
+	,MAX(COALESCE(cust_days_data0101_7_days.value151, 0)) AS value151 
+	,MAX(COALESCE(cust_days_data0101_7_days.value158, 0)) AS value158 
+	,MAX(COALESCE(cust_days_data0101_7_days.value165, 0)) AS value165 
+	,MAX(COALESCE(cust_days_data0101_7_days.value152, 0)) AS value152 
+	,MAX(COALESCE(cust_days_data0101_7_days.value159, 0)) AS value159 
+	,MAX(COALESCE(cust_days_data0101_7_days.value166, 0)) AS value166 
+	,MAX(COALESCE(cust_days_data0101_7_days.value150, 0)) AS value150 
+	,MAX(COALESCE(cust_days_data0101_7_days.value157, 0)) AS value157 
+	,MAX(COALESCE(cust_days_data0101_7_days.value164, 0)) AS value164 
+	,MAX(COALESCE(cust_days_data0101_90_days.value43, 0)) AS value43 
+	,MAX(COALESCE(cust_days_data0101_90_days.value50, 0)) AS value50 
+	,MAX(COALESCE(cust_days_data0101_90_days.value57, 0)) AS value57 
+	,MAX(COALESCE(cust_days_data0101_90_days.value51, 0)) AS value51 
+	,MAX(COALESCE(cust_days_data0101_90_days.value58, 0)) AS value58 
+	,MAX(COALESCE(cust_days_data0101_90_days.value48, 0)) AS value48 
+	,MAX(COALESCE(cust_days_data0101_90_days.value55, 0)) AS value55 
+	,MAX(COALESCE(cust_days_data0101_90_days.value62, 0)) AS value62 
+	,MAX(COALESCE(cust_days_data0101_90_days.value46, 0)) AS value46 
+	,MAX(COALESCE(cust_days_data0101_90_days.value53, 0)) AS value53 
+	,MAX(COALESCE(cust_days_data0101_90_days.value60, 0)) AS value60 
+	,MAX(COALESCE(cust_days_data0101_90_days.value47, 0)) AS value47 
+	,MAX(COALESCE(cust_days_data0101_90_days.value54, 0)) AS value54 
+	,MAX(COALESCE(cust_days_data0101_90_days.value61, 0)) AS value61 
+	,MAX(COALESCE(cust_days_data0101_90_days.value45, 0)) AS value45 
+	,MAX(COALESCE(cust_days_data0101_90_days.value52, 0)) AS value52 
+	,MAX(COALESCE(cust_days_data0101_90_days.value59, 0)) AS value59 
+	,MAX(COALESCE(cust_demo_0101.value3631, 0)) AS value3631 
+	,cust_demo_0101.value3632 AS value3632 
+	,cust_demo_0101.value3633 AS value3633 
+	,cust_demo_0101.value3634 AS value3634 
+	,cust_demo_0101.value3635 AS value3635 
+	,cust_demo_0101.value3636 AS value3636 
+	,cust_demo_0101.value3637 AS value3637 
+	,cust_demo_0101.value3638 AS value3638 
+	,MAX(COALESCE(cust_value10298A4_days.value358, 0)) AS value358 
+	,MAX(COALESCE(cust_value10298A4_days.value372, 0)) AS value372 
+	,MAX(COALESCE(cust_value10298A4_days.value366, 0)) AS value366 
+	,MAX(COALESCE(cust_value10298A4_days.value373, 0)) AS value373 
+	,MAX(COALESCE(cust_value10298A4_days.value363, 0)) AS value363 
+	,MAX(COALESCE(cust_value10298A4_days.value370, 0)) AS value370 
+	,MAX(COALESCE(cust_value10298A4_days.value377, 0)) AS value377 
+	,MAX(COALESCE(cust_value10298A4_days.value361, 0)) AS value361 
+	,MAX(COALESCE(cust_value10298A4_days.value368, 0)) AS value368 
+	,MAX(COALESCE(cust_value10298A4_days.value375, 0)) AS value375 
+	,MAX(COALESCE(cust_value10298A4_days.value362, 0)) AS value362 
+	,MAX(COALESCE(cust_value10298A4_days.value369, 0)) AS value369 
+	,MAX(COALESCE(cust_value10298A4_days.value376, 0)) AS value376 
+	,MAX(COALESCE(cust_value10298A4_days.value360, 0)) AS value360 
+	,MAX(COALESCE(cust_value10298A4_days.value367, 0)) AS value367 
+	,MAX(COALESCE(cust_value10298A4_days.value374, 0)) AS value374 
+	,MAX(COALESCE(cust_value10298A80_days.value268, 0)) AS value268 
+	,MAX(COALESCE(cust_value10298A80_days.value256, 0)) AS value256 
+	,MAX(COALESCE(cust_value10298A_day.value442, 0)) AS value442 
+	,MAX(COALESCE(cust_value10298A_day.value449, 0)) AS value449 
+	,MAX(COALESCE(cust_value10298A_day.value456, 0)) AS value456 
+	,MAX(COALESCE(cust_value10298A_day.value450, 0)) AS value450 
+	,MAX(COALESCE(cust_value10298A_day.value457, 0)) AS value457 
+	,MAX(COALESCE(cust_value10298A_day.value447, 0)) AS value447 
+	,MAX(COALESCE(cust_value10298A_day.value454, 0)) AS value454 
+	,MAX(COALESCE(cust_value10298A_day.value461, 0)) AS value461 
+	,MAX(COALESCE(cust_value10298A_day.value445, 0)) AS value445 
+	,MAX(COALESCE(cust_value10298A_day.value452, 0)) AS value452 
+	,MAX(COALESCE(cust_value10298A_day.value459, 0)) AS value459 
+	,MAX(COALESCE(cust_value10298A_day.value446, 0)) AS value446 
+	,MAX(COALESCE(cust_value10298A_day.value453, 0)) AS value453 
+	,MAX(COALESCE(cust_value10298A_day.value460, 0)) AS value460 
+	,MAX(COALESCE(cust_value10298A_day.value444, 0)) AS value444 
+	,MAX(COALESCE(cust_value10298A_day.value451, 0)) AS value451 
+	,MAX(COALESCE(cust_value10298A_day.value458, 0)) AS value458 
+	,MAX(COALESCE(cust_value10298Z5_days.value344, 0)) AS value344 
+	,MAX(COALESCE(cust_value10298Z5_days.value342, 0)) AS value342 
+	,MAX(COALESCE(cust_value10298Z5_days.value355, 0)) AS value355 
+	,MAX(COALESCE(cust_value10298Z5_days.value346, 0)) AS value346 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value323, 0)) AS value323 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value324, 0)) AS value324 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value328, 0)) AS value328 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value319, 0)) AS value319 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value326, 0)) AS value326 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value327, 0)) AS value327 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value318, 0)) AS value318 
+	,MAX(COALESCE(imp_top_ups_j_30_days.value325, 0)) AS value325 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value232, 0)) AS value232 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value239, 0)) AS value239 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value246, 0)) AS value246 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value240, 0)) AS value240 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value247, 0)) AS value247 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value237, 0)) AS value237 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value244, 0)) AS value244 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value251, 0)) AS value251 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value235, 0)) AS value235 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value242, 0)) AS value242 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value249, 0)) AS value249 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value236, 0)) AS value236 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value243, 0)) AS value243 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value250, 0)) AS value250 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value234, 0)) AS value234 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value241, 0)) AS value241 
+	,MAX(COALESCE(imp_top_ups_j_365_days.value248, 0)) AS value248 
+	,MAX(COALESCE(cust_value10298Z52days.value421, 0)) AS value421 
+	,MAX(COALESCE(cust_value10298Z52days.value428, 0)) AS value428 
+	,MAX(COALESCE(cust_value10298Z52days.value435, 0)) AS value435 
+	,MAX(COALESCE(cust_value10298Z52days.value429, 0)) AS value429 
+	,MAX(COALESCE(cust_value10298Z52days.value436, 0)) AS value436 
+	,MAX(COALESCE(cust_value10298Z52days.value426, 0)) AS value426 
+	,MAX(COALESCE(cust_value10298Z52days.value440, 0)) AS value440 
+	,MAX(COALESCE(cust_value10298Z52days.value424, 0)) AS value424 
+	,MAX(COALESCE(cust_value10298Z52days.value431, 0)) AS value431 
+	,MAX(COALESCE(cust_value10298Z52days.value438, 0)) AS value438 
+	,MAX(COALESCE(cust_value10298Z52days.value425, 0)) AS value425 
+	,MAX(COALESCE(cust_value10298Z52days.value439, 0)) AS value439 
+	,MAX(COALESCE(cust_value10298Z52days.value423, 0)) AS value423 
+	,MAX(COALESCE(cust_value10298Z52days.value430, 0)) AS value430 
+	,MAX(COALESCE(cust_value10298Z52days.value437, 0)) AS value437 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value400, 0)) AS value400 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value407, 0)) AS value407 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value414, 0)) AS value414 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value408, 0)) AS value408 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value415, 0)) AS value415 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value412, 0)) AS value412 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value419, 0)) AS value419 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value410, 0)) AS value410 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value417, 0)) AS value417 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value411, 0)) AS value411 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value418, 0)) AS value418 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value409, 0)) AS value409 
+	,MAX(COALESCE(imp_top_ups_j_5_days.value416, 0)) AS value416 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value295, 0)) AS value295 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value303, 0)) AS value303 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value310, 0)) AS value310 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value300, 0)) AS value300 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value307, 0)) AS value307 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value298, 0)) AS value298 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value305, 0)) AS value305 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value312, 0)) AS value312 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value299, 0)) AS value299 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value306, 0)) AS value306 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value313, 0)) AS value313 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value297, 0)) AS value297 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value304, 0)) AS value304 
+	,MAX(COALESCE(imp_top_ups_j_60_days.value311, 0)) AS value311 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value379, 0)) AS value379 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value386, 0)) AS value386 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value387, 0)) AS value387 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value384, 0)) AS value384 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value391, 0)) AS value391 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value382, 0)) AS value382 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value389, 0)) AS value389 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value383, 0)) AS value383 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value390, 0)) AS value390 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value397, 0)) AS value397 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value381, 0)) AS value381 
+	,MAX(COALESCE(imp_top_ups_j_7_days.value388, 0)) AS value388 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value281, 0)) AS value281 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value282, 0)) AS value282 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value289, 0)) AS value289 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value286, 0)) AS value286 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value293, 0)) AS value293 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value284, 0)) AS value284 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value291, 0)) AS value291 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value285, 0)) AS value285 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value292, 0)) AS value292 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value276, 0)) AS value276 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value283, 0)) AS value283 
+	,MAX(COALESCE(imp_top_ups_j_90_days.value290, 0)) AS value290 
+    AVG(order_total) AS avg_order_total
+  FROM orders od 
+  inner join 
+  db_202104011224669309_telco.imp_target_churn tgt
+  on od.cust_id=tgt.customer_key
+  AND od.order_date=tgt.upd_date
+  GROUP BY 1
+),
+churn_data AS (
+  SELECT 
+    customer_id,
+    CASE WHEN last_order_date < DATE_SUB(NOW(), INTERVAL 120 DAY) THEN 1 ELSE 0 END AS churned
+  FROM customer_data  cd
+  LEFT JOIN ( 
+SELECT tgt.msdin 
+,tgt.event_date 
+,MIN(CASE 
+WHEN side_b_operator = 'C' 
+THEN src.call_duration 
+ELSE NULL 
+END) AS var2307 
+FROM db_202104011224669309_telco.imp_cdr_j src 
+INNER JOIN db_202104011224669309_telco.imp_target_churn tgt ON tgt.msdin = src.msdin 
+AND src.mscustomer=cd.id
+WHERE src.call_dt BETWEEN (tgt.event_date - interval '14' day) 
+AND (tgt.event_date) 
+GROUP BY tgt.msdin ) tgt
+cd.id=tgt.msdin
+group by customer_id,churned
+),
+tgt.event_date 
+(
+SELECT tgt.msdin 
+,tgt.event_date 
+,SUM(CASE 
+WHEN call_cust_value10298Z52 = 'media' 
+THEN 1 
+ELSE 0 
+END) AS var811 
+,SUM(CASE 
+WHEN LEFT(LEFT(operator_initials,1),1) = 'E' 
+THEN 1 
+ELSE 0 
+END) AS var871 
+,SUM(CASE 
+WHEN time_of_day = 'peak' 
+AND call_cust_value10298Z52 = 'media' 
+THEN 1 
+ELSE 0 
+END) AS var895 
+,SUM(CASE 
+WHEN LEFT(operator_initials,1) = 'A' 
+AND call_cust_value10298Z52 = 'media' 
+THEN 1 
+ELSE 0 
+END) AS var1015 
+,coalesce(SUM(CASE 
+WHEN call_cust_value10298Z52 = 'media' 
+THEN 1.0000 
+ELSE 0 
+END) / nullif(SUM(1), 0), 0) AS var812 
+,coalesce(SUM(CASE 
+WHEN LEFT(operator_initials,1) = 'E' 
+THEN 1.0000 
+ELSE 0 
+END) / nullif(SUM(1), 0), 0) AS var872 
+,coalesce(SUM(CASE 
+WHEN time_of_day = 'peak' 
+AND call_cust_value10298Z52 = 'media' 
+THEN 1.0000 
+ELSE 0 
+END) / nullif(SUM(1), 0), 0) AS var896 
+,coalesce(SUM(CASE 
+WHEN inb_outb_indicator = 'inb' 
+AND time_of_day = 'peak' 
+THEN 1.0000 
+ELSE 0 
+END) / nullif(SUM(1), 0), 0) AS var920 
+,coalesce(SUM(CASE 
+WHEN LEFT(operator_initials,1) = 'A' 
+AND call_cust_value10298Z52 = 'media' 
+THEN 1.0000 
+ELSE 0 
+END) / nullif(SUM(1), 0), 0) AS var1016 
+,SUM(CASE 
+WHEN TRUE = TRUE 
+THEN src.call_volume 
+ELSE 0 
+END) AS var756 
+,SUM(CASE 
+WHEN time_of_day = 'off-peak' 
+THEN src.call_volume 
+ELSE 0 
+END) AS var840 
+,SUM(CASE 
+WHEN inb_outb_indicator = 'inb' 
+AND time_of_day = 'off-peak' 
+THEN src.call_volume 
+ELSE 0 
+END) AS var912 
+,SUM(CASE 
+WHEN inb_outb_indicator = 'inb' 
+AND call_cust_value10298Z52 = 'voice' 
+THEN src.call_duration 
+ELSE 0 
+END) AS var1013 
+,coalesce(SUM(CASE 
+WHEN inb_outb_indicator = 'inb' 
+THEN src.call_duration * 1.0000 
+ELSE 0 
+END) / nullif(SUM(call_duration), 0), 0) AS var774 
+,coalesce(SUM(CASE 
+WHEN inb_outb_indicator = 'inb' 
+AND time_of_day = 'peak' 
+THEN src.call_duration * 1.0000 
+ELSE 0 
+END) / nullif(SUM(call_duration), 0), 0) AS var930 
+,coalesce(SUM(CASE 
+WHEN time_of_day = 'peak' 
+AND call_cust_value10298Z52 = 'voice' 
+THEN src.call_duration * 1.0000 
+ELSE 0 
+END) / nullif(SUM(call_duration), 0), 0) AS var954 
+,coalesce(SUM(CASE 
+WHEN time_of_day = 'peak' 
+AND side_b_operator = 'B' 
+THEN src.call_duration * 1.0000 
+ELSE 0 
+END) / nullif(SUM(call_duration), 0), 0) AS var966 
+,coalesce(SUM(CASE 
+WHEN inb_outb_indicator = 'inb' 
+AND call_cust_value10298Z52 = 'voice' 
+THEN src.call_duration * 1.0000 
+ELSE 0 
+END) / nullif(SUM(call_duration), 0), 0) AS var1014 
+,coalesce(SUM(CASE 
+WHEN LEFT(operator_initials,1) = 'A' 
+AND call_cust_value10298Z52 = 'media' 
+THEN src.call_duration * 1.0000 
+ELSE 0 
+END) / nullif(SUM(call_duration), 0), 0) AS var1026 
+,coalesce(SUM(CASE 
+WHEN inb_outb_indicator = 'inb' 
+AND time_of_day = 'peak' 
+AND call_cust_value10298Z52 = 'voice' 
+THEN src.call_duration * 1.0000 
+ELSE 0 
+END) / nullif(SUM(call_duration), 0), 0) AS var1038 
+,MIN(CASE 
+WHEN inb_outb_indicator = 'inb' 
+THEN src.call_duration 
+ELSE NULL 
+END) AS var771 
+,MIN(CASE 
+WHEN side_b_operator = 'B' 
+THEN src.call_duration 
+ELSE NULL 
+END) AS var855 
+,MIN(CASE 
+WHEN time_of_day = 'peak' 
+AND call_cust_value10298Z52 = 'voice' 
+THEN src.call_duration 
+ELSE NULL 
+END) AS var951 
+,MIN(CASE 
+WHEN time_of_day = 'peak' 
+AND side_b_operator = 'B' 
+THEN src.call_duration 
+ELSE NULL 
+END) AS var963 
+,MIN(CASE 
+WHEN inb_outb_indicator = 'inb' 
+AND call_cust_value10298Z52 = 'voice' 
+THEN src.call_duration 
+ELSE NULL 
+END) AS var1011 
+,MAX(CASE 
+WHEN TRUE = TRUE 
+THEN src.call_volume 
+ELSE NULL 
+END) AS var755 
+SELECT 
+  AVG(total_orders) AS avg_total_orders,
+  AVG(total_spent) AS avg_total_spent,
+  AVG(avg_days_between_orders) AS avg_days_between_orders,
+  AVG(orders_last_30_days) AS avg_orders_last_30_days,
+  AVG(avg_order_total) AS avg_order_total,
+  SUM(churned) / COUNT(*) AS churn_rate
+FROM customer_data
+JOIN churn_data USING (customer_id)
+WHERE latest_order_date >= DATE_SUB(NOW(), INTERVAL 180 DAY),
+WHEN topup_channel = 'online' 
+THEN src.topup_amount 
+ELSE NULL 
+END) AS var291 
+,MAX(CASE 
+WHEN topup_channel = 'store' 
+THEN src.topup_amount 
+ELSE NULL 
+END) AS var285 
+,MAX(CASE 
+WHEN topup_channel = 'online' 
+THEN src.topup_amount 
+ELSE NULL 
+END) AS var292 
+,AVG(CASE 
+WHEN TRUE = TRUE 
+THEN src.topup_amount 
+ELSE NULL 
+END) AS var276 
+,AVG(CASE 
+WHEN topup_channel = 'store' 
+THEN src.topup_amount 
+ELSE NULL 
+END) AS var283 
+,AVG(CASE 
+WHEN topup_channel = 'online' 
+THEN src.topup_amount 
+ELSE NULL 
+END) AS var290 
+FROM db_202104011224669309_telco.imp_top_ups_j src 
+INNER JOIN db_202104011224669309_telco.imp_target_churn tgt ON tgt.msdin = src.msdin 
+WHERE src.topup_date BETWEEN (tgt.event_date - interval '90' day) 
+AND (tgt.event_date) 
+GROUP BY tgt.msdin 
+,tgt.event_date 
+) imp_top_ups_j_90_days ON tgt.msdin = imp_top_ups_j_90_days.msdin 
+AND tgt.event_date = imp_top_ups_j_90_days.event_date; 
